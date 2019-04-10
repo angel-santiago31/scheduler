@@ -1,0 +1,33 @@
+.content {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-top {
+    justify-content: center;
+    width: 80%;
+}
+
+.form {
+   justify-content: center;
+   align-items: center;
+}
+
+.input-field {
+    width: 80%;
+}
+
+.form-button {
+    width: 20%;
+}
+
+.logout {
+    background-color: #D51A1A;
+    color: #fff;
+    width: 100%;
+}
+
+.list-group-item {
+    justify-content: space-between;
+}

@@ -1,0 +1,38 @@
+<Page class="page" navigatingTo="onNavigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+
+	<ActionBar title="Appointments"></ActionBar>
+    
+    <FlexboxLayout class="content">
+
+        <StackLayout class="content-top m-t-30">
+
+            <FlexboxLayout class="form">
+                <Label class="form-button text-red m-r-20" text="Add" onTap="createAppointment" />
+
+                <StackLayout class="input-field">
+                    <TextField class="input body" hint="MM-DD-YYYY" keyboardType="datetime" id="input" />
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+            </FlexboxLayout>
+
+            <ListView items="{{ appointments.appointments }}" height="300" class="list-group" separatorColor="transparent">
+                <ListView.itemTemplate>
+                    <FlexboxLayout class="list-group-item">
+                        <Image src="~/images/calendar-icon-flat.jpg" class="thumb img-circle"></Image>
+
+                        <Label text="{{ dateTime }}" class="body" />
+
+                        <Label class="text-red" text="Delete" value="{{ _id }}" onTap="removeAppointment" />
+                    </FlexboxLayout>
+                </ListView.itemTemplate>
+            </ListView>
+
+        </StackLayout>
+
+        <FlexboxLayout class="content-bottom">
+            <Label class="logout text-center p-y-10" text="Logout" onTap="{{ logout }}" />
+        </FlexboxLayout>
+
+
+    </FlexboxLayout>
+</Page>
