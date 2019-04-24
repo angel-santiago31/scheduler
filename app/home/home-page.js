@@ -5,7 +5,7 @@ var observableArray = require("tns-core-modules/data/observable-array");
 const Kinvey = require("kinvey-nativescript-sdk").Kinvey;
 var dataStore = Kinvey.DataStore.collection('appointment', Kinvey.DataStoreType.Network);
 
-var page;
+let page;
 
 /*
 * Fetches all user appointments
@@ -13,7 +13,13 @@ var page;
 */
 exports.onNavigatingTo = function(args) {
     page = args.object;
-    var arr = new observableArray.ObservableArray();
+
+    let arr = new observableArray.ObservableArray();
+
+    const dateInput = page.getViewById('input');
+    dateInput.set("date", new Date());
+    dateInput.set("minDate", new Date());
+    dateInput.set("maxDate", new Date(2021, 01, 01));
 
     dataStore.find()
     .subscribe(function(entities) {
@@ -30,7 +36,7 @@ exports.onNavigatingTo = function(args) {
 * or failure upon deletion.
 */
 exports.removeAppointment = function(args) {
-    var li = args.object;
+    let li = args.object;
 
     dataStore.removeById(li.value)
     .then(() => {
@@ -56,20 +62,10 @@ exports.removeAppointment = function(args) {
 * or failure upon save.
 */
 exports.createAppointment = function() {
-    var date = page.getViewById('input').text;
+    let date = page.getViewById('input').date.toString();
+    date = date.split(' ').slice(0, 4).join(' ');
 
-    if (date.trim() === "") {
-        alert("Date cannot be blank.");
-        return;
-    }
-
-    var regex = /^\d{2}-\d{2}-\d{4}$/;
-    if(!regex.test(date)){
-        alert("Required date format MM-DD-YYYY.");
-        return;
-    }
-
-    dataStore.save({dateTime: date})
+    dataStore.save({ date })
     .then(() => {
         topmost().navigate({
             moduleName: "./home/home-page",
@@ -83,9 +79,5 @@ exports.createAppointment = function() {
     .catch((e) => {
         alert("Unfortunately we could not save your appointment.");
     });
-}
-
-exports.selectDate = function() {
-
 }
 

@@ -30,4 +30,5 @@
 
 .list-group-item {
     justify-content: space-between;
+    align-items: center;
 }

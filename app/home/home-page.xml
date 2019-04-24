@@ -1,4 +1,7 @@
-<Page class="page" navigatingTo="onNavigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+<Page class="page" navigatingTo="onNavigatingTo" 
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:datetime="nativescript-datetimepicker">
+    
 
 	<ActionBar title="Appointments"></ActionBar>
     
@@ -10,8 +13,9 @@
                 <Label class="form-button text-red m-r-20" text="Add" onTap="createAppointment" />
 
                 <StackLayout class="input-field">
-                    <TextField class="input body" hint="MM-DD-YYYY" keyboardType="datetime" id="input" />
-                    <StackLayout class="hr-light"></StackLayout>
+                    <!-- <TextField class="input body" hint="MM-DD-YYYY" keyboardType="datetime" id="input" /> -->
+                    <!-- <StackLayout class="hr-light"></StackLayout> -->
+                    <datetime:DatePickerField id="input" hint="Select Date" />
                 </StackLayout>
             </FlexboxLayout>
 
@@ -20,7 +24,7 @@
                     <FlexboxLayout class="list-group-item">
                         <Image src="~/images/calendar-icon-flat.jpg" class="thumb img-circle"></Image>
 
-                        <Label text="{{ dateTime }}" class="body" />
+                        <Label text="{{ date }}" />
 
                         <Label class="text-red" text="Delete" value="{{ _id }}" onTap="removeAppointment" />
                     </FlexboxLayout>
